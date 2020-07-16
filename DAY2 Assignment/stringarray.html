@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Day3 Q2</title>
+    </head>
+    <body>
+       
+        <p>Write a diff between var, let & const with code</p>
+        <p>A var variable can be redeclared and updated.</br>
+            A let variable be be updated but not redeclared.</br>
+            An example of trying to redeclare a let variable:</br>
+            // In editor:</br>
+            <script></br>
+            let points = 50;</br>
+            let points = 60;</br>
+            </script></br>
+            
+            let points = 50;</br>
+            points = 60;</br>
+            // In console:</br>
+            points</br>
+            // Returns:</br>
+            60</br>
+            The Scope of let</br>
+            If I declare a let variable at the global scope, then redeclare it within a block (curly brackets) as in the example below, I will not get an error in the console, but it will not actually redeclare let.</br>
+            let points = 50;</br>
+            let winner = false;</br>
+            if(points > 40) {</br>
+              let winner = true;</br>
+            }</br>
+            // If I call:</br>
+            winner</br>
+            // It returns the first value:</br> 
+            false</br>
+            Why is this happening?</br>
+            Because let winner = false and let winner = true, are actually two separate variables because they are scoped differently, even though they have the same name. To clarify:</br>
+            // This 'let' is scoped to the window (globally):</br>
+        </br>let winner = false;
+    </br>if(points > 40) {
+    </br>   // This 'let' is scoped to the block (between the curly brackets):
+</br>     let winner = true;
+</br>       }
+</br>       In the above example if we change bothletvariables to var, then call winner in the console it returns true because it is not inside a function. (Remember: var is function scoped.) The var variable is being redeclared within its scope, which is the window in this case.
+</br>       let points = 50;
+</br>       var winner = false;
+</br>       if(points > 40) {
+</br>         var winner = true;
+</br>       }
+</br>       // If I call:
+</br>       winner
+</br>       // It now returns: 
+</br>       true
+</br>       The Differences Between let and const
+</br>       const variables cannot be updated. let variables are made to be updated.
+</br>       // If I define the const variable:
+</br>       const key = 'xyz123';
+</br>       // Then try to redeclare it:
+</br>       key = 'xyz1234'
+</br>       // I get the following error:
+</br>       Uncaught TypeError: Assignment to constant variable.
+</br>       There is an interesting caveat to this, though. If I create a const variable that is an object, the attributes of that object can be updated.
+</br>       // Creating my person object:
+</br>       const person = {
+</br>         name: 'Lateef',
+</br>         age: 20
+</br>       }
+</br>       // Calling person in the console:
+</br>       person
+</br>       // It returns:
+</br>       {name: "lateef", age: 20}
+</br>       // If I then redeclare the age attribute:
+</br>       person.age = 34
+</br>       // When I call it:
+</br>       person
+</br>       // It returns:
+</br>       {name: "lateef", age: 20}
+</br>       Note: If I want to make object unchangeable I could “freeze” it:
+</br>       const lateef = Object.freeze(person);
+</br>       If I then try to change an attribute of the person object in my console, it does not take the changes:
+</br>       // If I call:
+</br>       person
+</br>       // It returns:
+</br>       {name: "lateef", age: 20}
+</br>       // However, if the object has been 'frozen' and I try to change the age attribute:
+</br>       person.age = 20
+</br>       // It will immediately return:
+</br>       20
+</br>       // But then when I call it:
+</br>       person.age
+</br>       // It returns the original age:
+</br>       33
+
+</br>       The advantages of using let vs. var in a for loop
+</br>       
+</br>       // Running a for loop with var:
+</br>       for(var i = 0; i < 10; i++){
+</br>           console.log(i);
+</br>       }
+</br>       // Returns 0 through 9 in the console, but if I call:
+</br>       i
+</br>       // It returns:
+</br>       10
+</br>      
+
+</br>       for(var i = 0; i < 10; i++) {
+</br>           console.log(i);
+</br>           setTimeout(function() {
+</br>             console.log('The number is ' + i);
+</br>           }, 1000);
+</br>       }
+</br>       // If we then call i in the console it returns:
+</br>       10
+</br>       Again, the variable i is being overwritten every time the loop runs. By the time setTimeout runs, i is 10.
+</br>       A quick way to fix this is the change var to let. Because let is block scoped (within the curly brackets), it will behave differently, and will not reassign i every time the loop runs:
+</br>       for(let i = 0; i < 10; i++) {
+</br>           console.log(i);
+</br>           setTimeout(function() {
+</br>             console.log('The number is ' + i);
+</br>           }, 1000);
+</br>       }
+</br>       // This returns 0 through 5 in the console, then after one second logs:
+</br>       The number is 0
+</br>       The number is 1
+</br>       The number is 2
+</br>       The number is 3
+</br>       The number is 4
+</br>       The number is 5
+</p>
+    </body>
