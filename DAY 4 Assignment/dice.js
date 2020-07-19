@@ -1,7 +1,7 @@
 const student =
 {
- name : "Helensiki",
- age : 24,
+ name : "Rio",
+ age : 20,
  projects:
  {
      diceGame: "Two players dice game using Javascript"
